@@ -3,6 +3,9 @@ import allsky
 import glob
 import datetime
 import os
+import sys
+
+os.chdir(os.path.dirname(sys.argv[0]))
 
 """
 Provide simple access to the AllSky camera throught a web interface.
@@ -10,7 +13,7 @@ n.b. create a director /static/images/ that links to the DOWNLOAD_DIR
 """
 
 MAX_FILES = 150
-DOWNLOAD_DIR = '/Users/tom/fits/'
+DOWNLOAD_DIR = '/home/pi/fits/'
 DEVICE = '/dev/tty.usbserial'
 DEFAULT_EXPOSURE = 0.1
 
