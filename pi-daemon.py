@@ -2,6 +2,7 @@ import web
 import allsky
 import glob
 import datetime
+imporst time
 import os
 
 """
@@ -50,6 +51,9 @@ class SBIG:
         assert(exposure > 0 and exposure < 653.3599)
         self._camLock = True
         cam = allsky.AllSkyCamera(DEVICE)
+        cam.open_shutter()
+        time.sleep(1)
+        cam.de_energize_shutter()
         image = cam.get_image(exposure)
         image.writeto(DOWNLOAD_DIR + str(datetime.datetime.now()) + '.fits')
         self._camLock = False
