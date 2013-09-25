@@ -2,7 +2,7 @@ import web
 import allsky
 import glob
 import datetime
-imporst time
+import time
 import os
 import sys
 
@@ -23,15 +23,18 @@ urls = ('/', 'SBIG',
 
 render = web.template.render('templates', base='base')
 
+
 class Viewer:
     def GET(self, name):
         img_url = '/static/images/' + name
         return render.fitsview(img_url)
 
+
 class SBIG:
     form = web.form.Form(
         web.form.Textbox('exposure', web.form.notnull,
-                         description='Exposure Time (s):', value=DEFAULT_EXPOSURE),
+                         description='Exposure Time (s):',
+                         value=DEFAULT_EXPOSURE),
         web.form.Button('Take Image'),
     )
 
@@ -55,8 +58,6 @@ class SBIG:
         self._camLock = True
         cam = allsky.AllSkyCamera(DEVICE)
         cam.open_shutter()
-        time.sleep(1)
-        cam.de_energize_shutter()
         image = cam.get_image(exposure)
         image.writeto(DOWNLOAD_DIR + str(datetime.datetime.now()) + '.fits')
         self._camLock = False
