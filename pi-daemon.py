@@ -2,7 +2,6 @@ import web
 import allsky
 import glob
 import datetime
-import time
 import os
 import sys
 
